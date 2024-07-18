@@ -29,3 +29,16 @@ Preferred import sort tool for python is `isort`. We use single line for imports
 line_length = 79
 force_single_line = true
 ```
+
+## Docstring
+
+```py
+"""
+Description of the function.
+
+@param1: value
+@param2: value
+@param3: value
+@param4: value
+"""
+```
