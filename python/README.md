@@ -34,11 +34,26 @@ force_single_line = true
 
 ```py
 """
-Description of the function.
+A description of the function
 
 @param1: value
 @param2: value
 @param3: value
 @param4: value
 """
+```
+
+Example:
+
+```py
+class User:
+    def __init__(self, username:str, password:str):
+        """
+        A class for a user
+
+        @username: The name of the user
+        @password: A strong password for the user
+        """
+        self.username = username
+        self.password = password
 ```
