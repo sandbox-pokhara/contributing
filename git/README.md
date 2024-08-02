@@ -19,19 +19,16 @@ The commit descrption must follow the following guidelines:
 
 ### Commit Types
 
-| Commit Type | Title                    | Description                                                                                                 |
-| ----------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `feat`      | Features                 | A new feature                                                                                               |
-| `fix`       | Bug Fixes                | A bug Fix                                                                                                   |
-| `docs`      | Documentation            | Documentation only changes                                                                                  |
-| `style`     | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)      |
-| `refactor`  | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                                   |
-| `perf`      | Performance Improvements | A code change that improves performance                                                                     |
-| `test`      | Tests                    | Adding missing tests or correcting existing tests                                                           |
-| `build`     | Builds                   | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)         |
-| `ci`        | Continuous Integrations  | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) |
-| `chore`     | Chores                   | Other changes that don't modify src or test files                                                           |
-| `revert`    | Reverts                  | Reverts a previous commit                                                                                   |
+| Commit Type | Title                    | Modifies Source Code? | Description                                                                                            |
+| ----------- | ------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------ |
+| `feat`      | Features                 | Yes                   | A new feature                                                                                          |
+| `fix`       | Bug Fixes                | Yes                   | A bug fix                                                                                              |
+| `refactor`  | Code Refactoring         | Yes                   | A code change that neither fixes a bug nor adds a feature, it changes an existing feature              |
+| `style`     | Styles                   | Yes                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) |
+| `perf`      | Performance Improvements | Yes                   | A code change that improves performance                                                                |
+| `test`      | Tests                    | Yes                   | Adding missing tests or correcting existing tests                                                      |
+| `docs`      | Documentation            | No                    | Documentation only changes                                                                             |
+| `chore`     | Chores                   | No                    | Other changes that don't modify src or test files                                                      |
 
 ### Examples
 
@@ -47,7 +44,7 @@ The commit descrption must follow the following guidelines:
 - refactor: remove utils.py
 - pref: improve the performance of example algorithm
 - test: add test case for example module
-- ci: add deploy github workflow
+- chore: add deploy github workflow
 - chore: bump version to 1.0.8
 - chore: add example file to gitignore
 - chore: add example package to requirements
