@@ -10,57 +10,42 @@ typeCheckingMode = "strict"
 exclude = ["**/venv"]
 ```
 
-Extra packages are necessary for typing to work properly. Use `djangorestframework-stubs` and `django-stubs`.
+Extra packages are necessary for typing to work properly. Use `django-stubs`.
 
-## OpenAPI Docs
+## Django Ninja
 
-Use `drf-spectacular` to generate openapi docs.
+Django Ninja is used for creating API in Django. OpenAPI and SwaggerDocs are generated automatically.
 
-## Routing/Views
+The convention for swagger docs url is `/docs/`.
 
-DRF Viewsets are favored instead of APIView.
+```py
+# core/api.py
 
-Example `urls.py`
+from ninja import NinjaAPI
 
-```python
-router = DefaultRouter()
-router.register("app-settings", AppSettingsViewSet)
-router.register("accounts", AccountViewSet)
-router.register("workers", WorkerViewSet)
-router.register("gold", GoldViewSet)
-router.register("crystals", CrystalViewSet)
-router.register("trophies", TrophyViewSet)
-router.register("magic-dust", MagicDustViewSet)
-router.register("games", GameViewSet)
-router.register("cards", CardViewSet)
-router.register("crit", CritViewSet)
-router.register("analytics", AnalyticsViewSet, basename="analytics")
-urlpatterns = router.urls
+
+api = NinjaAPI(docs_url="/docs/")
 ```
 
-Example `views.py`
+### Schemas (Serializers)
 
-````python
-class GoldViewSet(ModelViewSet[Gold]):
-    queryset = Gold.objects.all().order_by("id")
-    serializer_class = GoldSerializer
-    permission_classes = [permissions.IsAuthenticated]
+Schemas are stored in `schemas.py`.
 
+#### Naming Convention
 
-class WorkerViewSet(ModelViewSet[Worker]):
-    @extend_schema(responses=GenericOutSerializer(), request=None)
-    @action(detail=True, methods=["post"], url_path="assign-accounts")
-    def assign_accounts(self, request: Request, pk: int | None = None):
-        ...```
-````
+- `UserDTO` for data transfer and model schemas.
+- `CreateUser` for create (POST) request body schema.
+- `UpdateUser` for update (PUT) request body schema.
+- `PartialUpdateUser` for partial update (PATCH) request body schema.
+- `DisableUser`, `EnableUser`, `BanUser` etc for non CRUD endpoints.
 
-## Serializers
+### CRUD
 
-The default naming convention for DRF serializers is too long. Use `In`/`Out` for request/response specific serializers.
-
-Example:
-
-```
-AssignWorkerRequestSerializer -> AssignWorkerIn
-AssignWorkerResponseSerializer -> AssignWorkerOut
-```
+| Function Name       | Endpoint            | Request           | Response         | Status Code |
+| ------------------- | ------------------- | ----------------- | ---------------- | ----------- |
+| retrive_user        | `GET /users/ID/`    |                   | UserDTO          | 200         |
+| list_users          | `GET /users/`       |                   | PaginatedUserDTO | 200         |
+| create_user         | `POST /users/`      | CreateUser        | UserDTO          | 201         |
+| partial_update_user | `PATCH /users/ID/`  | PartialUpdateUser | UserDTO          | 200         |
+| update_user         | `PUT /users/ID/`    | UpdateUser        | UserDTO          | 200         |
+| destroy_user        | `DELETE /users/ID/` |                   |                  | 204         |
