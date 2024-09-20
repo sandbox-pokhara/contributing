@@ -33,19 +33,19 @@ Schemas are stored in `schemas.py`.
 
 #### Naming Convention
 
-- `UserDTO` for data transfer and model schemas.
-- `CreateUser` for create (POST) request body schema.
-- `UpdateUser` for update (PUT) request body schema.
-- `PartialUpdateUser` for partial update (PATCH) request body schema.
-- `DisableUser`, `EnableUser`, `BanUser` etc for non CRUD endpoints.
+- `UserSchema` for data transfer and model schemas.
+- `CreateUserSchema` for create (POST) request body schema.
+- `UpdateUserSchema` for update (PUT) request body schema.
+- `PartialUpdateUserSchema` for partial update (PATCH) request body schema.
+- `DisableUserSchema`, `EnableUserSchema`, `BanUserSchema` etc for non CRUD endpoints.
 
 ### CRUD
 
-| Function Name       | Endpoint            | Request           | Response         | Status Code |
-| ------------------- | ------------------- | ----------------- | ---------------- | ----------- |
-| retrive_user        | `GET /users/ID/`    |                   | UserDTO          | 200         |
-| list_users          | `GET /users/`       |                   | PaginatedUserDTO | 200         |
-| create_user         | `POST /users/`      | CreateUser        | UserDTO          | 201         |
-| partial_update_user | `PATCH /users/ID/`  | PartialUpdateUser | UserDTO          | 200         |
-| update_user         | `PUT /users/ID/`    | UpdateUser        | UserDTO          | 200         |
-| destroy_user        | `DELETE /users/ID/` |                   |                  | 204         |
+| Function Name       | Endpoint            | Request                 | Response            | Status Code |
+| ------------------- | ------------------- | ----------------------- | ------------------- | ----------- |
+| retrive_user        | `GET /users/ID/`    |                         | UserSchema          | 200         |
+| list_users          | `GET /users/`       |                         | PaginatedUserSchema | 200         |
+| create_user         | `POST /users/`      | CreateUserSchema        | UserSchema          | 201         |
+| partial_update_user | `PATCH /users/ID/`  | PartialUpdateUserSchema | UserSchema          | 200         |
+| update_user         | `PUT /users/ID/`    | UpdateUserSchema        | UserSchema          | 200         |
+| destroy_user        | `DELETE /users/ID/` |                         |                     | 204         |
