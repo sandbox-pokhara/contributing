@@ -24,7 +24,10 @@ The convention for swagger docs url is `/docs/`.
 from ninja import NinjaAPI
 
 
+users = Router()
+
 api = NinjaAPI(docs_url="/docs/")
+api.add_router("/users/", users, tags=["users"])
 ```
 
 ### Schemas (Serializers)
