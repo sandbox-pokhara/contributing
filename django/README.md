@@ -51,4 +51,4 @@ Schemas are stored in `schemas.py`.
 | create_user         | `POST /users/`      | CreateUserSchema        | UserSchema          | 201         |
 | partial_update_user | `PATCH /users/ID/`  | PartialUpdateUserSchema | UserSchema          | 200         |
 | update_user         | `PUT /users/ID/`    | UpdateUserSchema        | UserSchema          | 200         |
-| destroy_user        | `DELETE /users/ID/` |                         |                     | 204         |
+| delete_user         | `DELETE /users/ID/` |                         |                     | 204         |
