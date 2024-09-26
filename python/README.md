@@ -7,7 +7,6 @@ Strict typing using pyright is compulsory. Add pyright section in `pyproject.tom
 ```toml
 [tool.pyright]
 typeCheckingMode = "strict"
-exclude = ["**/venv"]
 ```
 
 ## Fomatting

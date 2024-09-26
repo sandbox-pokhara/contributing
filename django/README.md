@@ -7,10 +7,49 @@ Strict typing using pyright is compulsory. Add pyright section in `pyproject.tom
 ```toml
 [tool.pyright]
 typeCheckingMode = "strict"
-exclude = ["**/venv"]
+exclude = ["**/migrations"]
 ```
 
 Extra packages are necessary for typing to work properly. Use `django-stubs`.
+
+## Cookiecutter
+
+If you are starting a new project start the project using Sandbox's [django-cookiecutter](https://github.com/sandbox-pokhara/django-cookiecutter).
+
+## Folder Structure
+
+```
+.
+└── project-name/
+    ├── .gitignore
+    ├── Dockerfile
+    ├── manage.py
+    ├── requirements.txt
+    ├── taskfile.yml # alias for frequently used commands (https://taskfile.dev/)
+    ├── project_name/
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── env.py # typed .env parser using pydantic_settings
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    └── core/
+        ├── __init__.py
+        ├── actions.py # django admin actions
+        ├── admin.py
+        ├── api.py # django-ninja views
+        ├── apps.py
+        ├── buttons.py # django admin extra buttons using django-form-button
+        ├── choices.py # django model choices
+        ├── exceptions.py
+        ├── forms.py
+        ├── models.py
+        ├── schemas.py # django-ninja serializers
+        ├── security.py # django-ninja authentication classes
+        ├── tasks.py # background tasks (celery, pydantic)
+        ├── urls.py
+        └── utils.py # utility functions that is not a task or a view
+```
 
 ## Django Ninja
 
