@@ -14,7 +14,7 @@ Extra packages are necessary for typing to work properly. Use `django-stubs`.
 
 ## Cookiecutter
 
-If you are starting a new project start the project using Sandbox's [django-cookiecutter](https://github.com/sandbox-pokhara/django-cookiecutter).
+If you are starting a new project, start the project using Sandbox's [django-cookiecutter](https://github.com/sandbox-pokhara/django-cookiecutter).
 
 ## Folder Structure
 
@@ -33,7 +33,7 @@ If you are starting a new project start the project using Sandbox's [django-cook
     │   ├── settings.py
     │   ├── urls.py
     │   └── wsgi.py
-    └── core/
+    └── app_name/
         ├── __init__.py
         ├── actions.py # django admin actions
         ├── admin.py
