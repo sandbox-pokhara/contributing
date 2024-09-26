@@ -43,6 +43,7 @@ If you are starting a new project, start the project using Sandbox's [django-coo
         ├── choices.py # django model choices
         ├── exceptions.py
         ├── forms.py
+        ├── mixins.py # custom mixins
         ├── models.py
         ├── schemas.py # django-ninja serializers
         ├── security.py # django-ninja authentication classes
