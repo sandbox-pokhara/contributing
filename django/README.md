@@ -92,3 +92,32 @@ Schemas are stored in `schemas.py`.
 | partial_update_user | `PATCH /users/ID/`  | PartialUpdateUserSchema | UserSchema          | 200         |
 | update_user         | `PUT /users/ID/`    | UpdateUserSchema        | UserSchema          | 200         |
 | delete_user         | `DELETE /users/ID/` |                         |                     | 204         |
+
+#### Partial Update Schema
+
+In partial update schema, `fields_optional` to `__all__` and exclude `id`.
+
+```py
+class PartialUpdateUserSchema(ModelSchema):
+
+    class Meta:
+        model = User
+        exclude = ["id"]
+        fields_optional = "__all__"
+```
+
+#### Partial Update View
+
+To allow the user to make partial updates, use `payload.dict(exclude_unset=True).items()`. This ensures that only the specified fields get updated.
+
+```py
+@users.patch("/{id}/", response={200: GenericSchema, 404: GenericSchema})
+def partial_update_user(
+    request: HttpRequest, id: int, payload: PatchDict[PartialUpdateUserSchema]
+):
+    user = get_object_or_404(User, id=id)
+    for attr, value in payload.dict(exclude_unset=True).items():
+        setattr(user, attr, value)
+    user.save()
+    return 200, GenericSchema(detail="User updated Successfully.")
+```
