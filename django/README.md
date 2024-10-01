@@ -82,6 +82,20 @@ Schemas are stored in `schemas.py`.
 - `PartialUpdateUserSchema` for partial update (PATCH) request body schema.
 - `DisableUserSchema`, `EnableUserSchema`, `BanUserSchema` etc for non CRUD endpoints.
 
+### Foreign Key in Views
+
+```py
+@games.post("/", response={201: GameSchema})
+def create_game(request: HttpRequest, data: CreateGameSchema):
+    payload = data.dict()
+    # Cannot assign "205506": "Game.account" must be a "Account" instance.
+    # To fix this error, we convert integer to object
+    payload["account"] = get_object_or_404(
+        Account, id=payload.pop("account")
+    )
+    return 201, Game.objects.create(**payload)
+```
+
 ### CRUD
 
 | Function Name       | Endpoint            | Request                 | Response            | Status Code |
@@ -120,4 +134,21 @@ def partial_update_user(
         setattr(user, attr, value)
     user.save()
     return 200, GenericSchema(detail="User updated Successfully.")
+```
+
+#### Create Schema
+
+```py
+class CreatUserSchema(ModelSchema):
+    class Meta:
+        model = User
+        exclude = ["id", "date_created", "date_modified"]
+```
+
+#### Create View
+
+```py
+@users.post("/", response={201: UserSchema})
+def create_user(request: HttpRequest, data: CreateUserSchema):
+    return 201, User.objects.create(**data)
 ```
