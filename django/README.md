@@ -43,6 +43,8 @@ If you are starting a new project, start the project using Sandbox's [django-coo
         ├── choices.py # django model choices
         ├── exceptions.py
         ├── forms.py
+        ├── list_filters.py # django admin custom SimpleListFilter
+        ├── metrics.py # django prometheus metrics
         ├── mixins.py # custom mixins
         ├── models.py
         ├── schemas.py # django-ninja serializers
@@ -50,6 +52,22 @@ If you are starting a new project, start the project using Sandbox's [django-coo
         ├── tasks.py # background tasks (celery, pydantic)
         ├── urls.py
         └── utils.py # utility functions that is not a task or a view
+```
+
+## Choices
+
+Use `models.TextChoices` or `models.IntegerChoices`.
+
+```py
+from django.db import models
+
+
+class RegionChoices(models.TextChoices):
+    BR = "BR", "BR"
+    EUNE = "EUNE", "EUNE"
+    EUW = "EUW", "EUW"
+    JP = "JP", "JP"
+    KR = "KR", "KR"
 ```
 
 ## Django Ninja
