@@ -170,3 +170,33 @@ class CreatUserSchema(ModelSchema):
 def create_user(request: HttpRequest, data: CreateUserSchema):
     return 201, User.objects.create(**data)
 ```
+
+### Common Exception Handlers
+
+```py
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
+from django.http import HttpRequest
+from ninja import NinjaAPI
+
+api = NinjaAPI(docs_url="/docs/")
+
+
+@api.exception_handler(IntegrityError)
+def integrity_error_handler(request: HttpRequest, exc: IntegrityError):
+    return api.create_response(request, {"detail": str(exc)}, status=400)
+
+
+@api.exception_handler(ValueError)
+def value_error_handler(request: HttpRequest, exc: ValueError):
+    return api.create_response(request, {"detail": str(exc)}, status=400)
+
+
+@api.exception_handler(ValidationError)
+def validation_error_handler(request: HttpRequest, exc: ValidationError):
+    return api.create_response(
+        request,
+        {"detail": " ".join([str(i) for i in exc])},
+        status=400,
+    )
+```
