@@ -17,6 +17,7 @@ Preferred formatter for python is `black`.
 [tool.black]
 line-length = 79
 preview = true
+enable-unstable-feature = ["string_processing"]
 ```
 
 ## Import Sorting
@@ -25,6 +26,7 @@ Preferred import sort tool for python is `isort`. We use single line for imports
 
 ```toml
 [tool.isort]
+profile = "black"
 line_length = 79
 force_single_line = true
 ```
